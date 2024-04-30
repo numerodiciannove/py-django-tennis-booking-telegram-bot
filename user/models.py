@@ -23,7 +23,7 @@ class TelegramUser(models.Model):
     )
     first_name = models.CharField(max_length=100, null=True, blank=True)
     last_name = models.CharField(max_length=100, null=True, blank=True)
-    telegram_id = models.CharField(max_length=255)
+    telegram_id = models.CharField(max_length=255, unique=True)
     phone_number = models.CharField(
         max_length=13,
         unique=True,
