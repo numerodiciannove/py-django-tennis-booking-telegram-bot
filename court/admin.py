@@ -1,3 +1,4 @@
+from court.models import Court
 from django.contrib import admin
 
-# Register your models here.
+admin.site.register(Court)
