@@ -21,6 +21,7 @@ class TelegramUser(models.Model):
         blank=True,
         null=True
     )
+    is_allowed = models.BooleanField(default=True)
     first_name = models.CharField(max_length=100, null=True, blank=True)
     last_name = models.CharField(max_length=100, null=True, blank=True)
     telegram_id = models.CharField(max_length=255, unique=True)
