@@ -1,4 +1,3 @@
-from court.models import Court
 from django.db import models
 from user.models import TelegramUser
 
@@ -44,16 +43,10 @@ class Booking(models.Model):
     created_time = models.DateTimeField(auto_now_add=True, blank=True)
     time = models.CharField(max_length=20, choices=TIME_SLOTS, )
     day = models.CharField(max_length=13, choices=DAY_OF_WEEK, )
-
     user = models.ForeignKey(
         TelegramUser,
         on_delete=models.CASCADE,
         related_name="user_bookings",
-    )
-    court = models.ForeignKey(
-        Court,
-        on_delete=models.CASCADE,
-        related_name="user_courts"
     )
     players_count = models.IntegerField(blank=True, null=True)
     is_repetitive = models.BooleanField(default=False)
@@ -66,7 +59,7 @@ class Booking(models.Model):
 
     def __str__(self):
         return (
-            f"{self.user} - ({self.court} - {self.day}, {self.time}, "
+            f"{self.user} - ({self.day}, {self.time}, "
             f"repetitive {self.is_repetitive})"
         )
 
