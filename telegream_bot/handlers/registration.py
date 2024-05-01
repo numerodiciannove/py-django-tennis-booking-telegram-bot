@@ -15,7 +15,8 @@ async def start_register(message: Message, state: FSMContext, bot: Bot):
     if user:
         await bot.send_message(
             message.from_user.id,
-            f"Ааа все! 🤓 \n\n{user.first_name} - @{user.telegram_username} вже зареєстрован!"
+            f"Ааа все! 🤓 \n\n{user.first_name} - @{user.telegram_username} вже зареєстрован!",
+            reply_markup=profile_kb
         )
     else:
         await bot.send_message(message.from_user.id, "Давай почнемо💫")

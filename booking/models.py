@@ -2,15 +2,22 @@ from django.db import models
 from user.models import TelegramUser
 
 
+class Event(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
 class Booking(models.Model):
     DAY_OF_WEEK = [
-        ("Monday", "Monday"),
-        ("Tuesday", "Tuesday"),
-        ("Wednesday", "Wednesday"),
-        ("Thursday", "Thursday"),
-        ("Friday", "Friday"),
-        ("Saturday", "Saturday"),
-        ("Sunday", "Sunday"),
+        ("Понеділок", "Понеділок"),
+        ("Вівторок", "Вівторок"),
+        ("Середа", "Середа"),
+        ("Четвер ", "Четвер "),
+        ("П’ятниця", "П’ятниця"),
+        ("Субота ", "Субота"),
+        ("Неділя", "Неділя"),
     ]
     TIME_SLOTS = [
         ("05:00 - 06:00", "05:00 - 06:00"),
@@ -33,12 +40,6 @@ class Booking(models.Model):
         ("22:00 - 23:00", "22:00 - 23:00"),
         ("23:00 - 00:00", "23:00 - 00:00"),
     ]
-    EVENT_CHOICES = [
-        ("tournament", "Tournament"),
-        ("group_training", "Group training"),
-        ("individual_training", "Individual training"),
-        ("open_play", "Open play"),
-    ]
 
     created_time = models.DateTimeField(auto_now_add=True, blank=True)
     time = models.CharField(max_length=20, choices=TIME_SLOTS, )
@@ -50,11 +51,11 @@ class Booking(models.Model):
     )
     players_count = models.IntegerField(blank=True, null=True)
     is_repetitive = models.BooleanField(default=False)
-    event = models.CharField(
-        max_length=50,
-        blank=True,
+    event = models.ForeignKey(
+        Event,
+        on_delete=models.CASCADE,
         null=True,
-        choices=EVENT_CHOICES,
+        blank=True
     )
 
     def __str__(self):
