@@ -53,7 +53,7 @@ async def register_phone(message: Message, state: FSMContext, bot: Bot):
             first_name=reg_name,
             phone_number=reg_phone,
             telegram_id=message.from_user.id,
-            telegram_username=message.from_user.username
+            telegram_username=f"@{message.from_user.username}"
         )
         await state.clear()
     else:
