@@ -5,7 +5,8 @@ from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 from telegream_bot.keyboards.profile_kb import profile_kb
 from telegream_bot.state.register import RegisterState
-from telegream_bot.utils.db_utils import get_user_by_telegram_id, create_user
+from asgiref.sync import sync_to_async
+from user.models import TelegramUser
 
 logger = logging.getLogger(__name__)
 
@@ -61,3 +62,22 @@ async def register_phone(message: Message, state: FSMContext, bot: Bot):
             message.from_user.id,
             "Вказан не вірний номер телефону."
         )
+
+
+@sync_to_async
+def create_user(first_name, phone_number, telegram_id, telegram_username):
+    TelegramUser.objects.create(
+        first_name=first_name,
+        phone_number=phone_number,
+        telegram_id=telegram_id,
+        telegram_username=telegram_username
+    )
+
+
+@sync_to_async
+def get_user_by_telegram_id(telegram_id):
+    try:
+        user = TelegramUser.objects.get(telegram_id=telegram_id)
+        return user
+    except TelegramUser.DoesNotExist:
+        return None

@@ -2,13 +2,6 @@ from django.db import models
 from user.models import TelegramUser
 
 
-class Event(models.Model):
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
-
-
 class Booking(models.Model):
     DAY_OF_WEEK = [
         ("Понеділок", "Понеділок"),
@@ -16,8 +9,16 @@ class Booking(models.Model):
         ("Середа", "Середа"),
         ("Четвер ", "Четвер "),
         ("П’ятниця", "П’ятниця"),
-        ("Субота ", "Субота"),
+        ("Субота", "Субота"),
         ("Неділя", "Неділя"),
+    ]
+    EVENTS = [
+        ("🎾", "🎾"),
+        ("🎾👨‍👧‍👧", "🎾👨‍👧‍👧"),
+        ("🎾👯", "🎾👯"),
+        ("🎾🏆 ", "🎾 🏆"),
+        ("🏀", "🏀"),
+        ("🏐", "🏐"),
     ]
     TIME_SLOTS = [
         ("05:00 - 06:00", "05:00 - 06:00"),
@@ -51,9 +52,9 @@ class Booking(models.Model):
     )
     players_count = models.IntegerField(blank=True, null=True)
     is_repetitive = models.BooleanField(default=False)
-    event = models.ForeignKey(
-        Event,
-        on_delete=models.CASCADE,
+    event = models.CharField(
+        max_length=10,
+        choices=EVENTS,
         null=True,
         blank=True
     )
