@@ -6,6 +6,5 @@ profile_kb = ReplyKeyboardMarkup(
         [KeyboardButton(text="🎾Календар")]
     ],
     resize_keyboard=True,
-    one_time_keyboard=True,
     input_field_placeholder="Натисни на кнопку нижче. 💫"
 )

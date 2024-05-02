@@ -1,4 +1,4 @@
-from  aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 register_keyboard = ReplyKeyboardMarkup(
     keyboard=[

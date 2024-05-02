@@ -3,12 +3,15 @@ import logging
 
 from aiogram import Dispatcher, Bot, F
 from dotenv import load_dotenv
+from telegream_bot.handlers.calendar import open_calendar, show_calendar_all
+from telegream_bot.handlers.menu import go_to_main_menu
 from telegream_bot.state.register import RegisterState
 
 from .handlers.start import get_start
 from .utils.commands import set_commands
 from aiogram.filters import Command
-from .handlers.registration import start_register, register_name, register_phone
+from .handlers.registration import start_register, register_name, \
+    register_phone
 import os
 
 load_dotenv()
@@ -17,6 +20,7 @@ ADMIN_ID = os.environ["ADMIN_ID"]
 BOT_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
 bot = Bot(token=BOT_TOKEN, parse_mode="HTML")
 dp = Dispatcher()
+
 
 # Send message to admin when bot started
 async def start_bot(bot: Bot):
@@ -27,11 +31,17 @@ async def start_bot(bot: Bot):
 dp.startup.register(start_bot)
 dp.message.register(get_start, Command(commands="start"))
 
-
 # Register handler registration
-dp.message.register(start_register, F.text=="Зареєструватись")
+dp.message.register(start_register, F.text == "Зареєструватись")
 dp.message.register(register_name, RegisterState.first_name)
 dp.message.register(register_phone, RegisterState.phone_number)
+
+# Main menu
+dp.message.register(go_to_main_menu, F.text == "🔙 Повернутись до меню")
+
+# Calendar
+dp.message.register(open_calendar, F.text == "🎾Календар")
+dp.message.register(show_calendar_all, F.text == "🔎 Переглянути розклад на тиждень")
 
 
 async def main():
