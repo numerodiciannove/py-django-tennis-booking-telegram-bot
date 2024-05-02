@@ -6,6 +6,7 @@ from aiogram.fsm.context import FSMContext
 from telegream_bot.keyboards.profile_kb import profile_kb
 from telegream_bot.state.register import RegisterState
 from asgiref.sync import sync_to_async
+from telegream_bot.utils.db_utils import get_user_by_telegram_id
 from user.models import TelegramUser
 
 logger = logging.getLogger(__name__)
@@ -72,12 +73,3 @@ def create_user(first_name, phone_number, telegram_id, telegram_username):
         telegram_id=telegram_id,
         telegram_username=telegram_username
     )
-
-
-@sync_to_async
-def get_user_by_telegram_id(telegram_id):
-    try:
-        user = TelegramUser.objects.get(telegram_id=telegram_id)
-        return user
-    except TelegramUser.DoesNotExist:
-        return None

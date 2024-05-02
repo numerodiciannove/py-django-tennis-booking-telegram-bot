@@ -28,6 +28,7 @@ async def get_monday_calendar(message: Message, bot: Bot):
             f"Произошла ошибка: {str(e)}"
         )
 
+
 async def get_tuesday_calendar(message: Message, bot: Bot):
     try:
         day_info = await get_day_calendar("Вівторок")
@@ -160,3 +161,4 @@ def get_bookings_for_day_time_event(day, time):
         'user__telegram_username', 'event'
     )
     return list(bookings)
+

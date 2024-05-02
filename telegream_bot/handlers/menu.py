@@ -1,7 +1,7 @@
 from aiogram import Bot
 from aiogram.types import Message
-from telegream_bot.keyboards.calendar_day_kb import calendar_day_kb
 from telegream_bot.keyboards.profile_kb import profile_kb
+from telegream_bot.keyboards.сalendar_kb import calendar_day_kb
 
 
 async def go_to_main_menu(message: Message, bot: Bot):

@@ -4,6 +4,8 @@ import os
 
 from aiogram import Dispatcher, Bot, F
 from dotenv import load_dotenv
+from telegream_bot.handlers.add_booking import start_booking, add_day, \
+    add_time, add_is_repetitive, add_event
 from telegream_bot.handlers.calendar import (
     open_calendar,
     show_calendar_all,
@@ -16,6 +18,7 @@ from telegream_bot.handlers.calendar import (
     get_sunday_calendar
 )
 from telegream_bot.handlers.menu import go_to_main_menu, show_calendar_days
+from telegream_bot.state.booking import BookingState
 from telegream_bot.state.register import RegisterState
 
 from .handlers.start import get_start
@@ -51,15 +54,25 @@ dp.message.register(go_to_main_menu, F.text == "🔙 Повернутись до
 
 # Calendar
 dp.message.register(open_calendar, F.text == "🗓Календар")
-dp.message.register(get_monday_calendar, F.text == "Понеділок")
-dp.message.register(get_tuesday_calendar, F.text == "Вівторок")
-dp.message.register(get_wednesday_calendar, F.text == "Середа")
-dp.message.register(get_thursday_calendar, F.text == "Четвер")
-dp.message.register(get_friday_calendar, F.text == "П’ятниця")
-dp.message.register(get_saturday_calendar, F.text == "Субота")
-dp.message.register(get_sunday_calendar, F.text == "Неділя")
-dp.message.register(show_calendar_all, F.text == "🔎 Переглянути розклад на тиждень")
-dp.message.register(show_calendar_days, F.text == "🔎 Переглянути розклад по дням")
+dp.message.register(get_monday_calendar, F.text == "🗓Понеділок")
+dp.message.register(get_tuesday_calendar, F.text == "🗓Вівторок")
+dp.message.register(get_wednesday_calendar, F.text == "🗓Середа")
+dp.message.register(get_thursday_calendar, F.text == "🗓Четвер")
+dp.message.register(get_friday_calendar, F.text == "🗓П’ятниця")
+dp.message.register(get_saturday_calendar, F.text == "🗓Субота")
+dp.message.register(get_sunday_calendar, F.text == "🗓Неділя")
+dp.message.register(show_calendar_all,
+                    F.text == "🔎 Переглянути розклад на тиждень")
+dp.message.register(show_calendar_days,
+                    F.text == "🔎 Переглянути розклад по дням")
+
+# Create booking
+dp.message.register(start_booking, F.text == "✍️ Cтворити бронь")
+dp.message.register(add_day, BookingState.day)
+dp.callback_query.register(add_time, BookingState.time)
+dp.message.register(add_is_repetitive, BookingState.is_repetitive)
+dp.message.register(add_event, BookingState.event)
+
 
 async def main():
     # Menu commands
