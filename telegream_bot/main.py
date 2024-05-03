@@ -30,6 +30,7 @@ from telegream_bot.handlers.chane_user import (
 )
 from telegream_bot.handlers.delete_booking import start_bookings_for_delete, \
     delete_booking
+from telegream_bot.handlers.help import get_help
 from telegream_bot.handlers.menu import go_to_main_menu, show_calendar_days
 from telegream_bot.handlers.my_bookings import get_my_bookings
 from telegream_bot.state.booking import BookingState
@@ -62,6 +63,9 @@ async def start_bot(bot: Bot):
 # Start message
 dp.startup.register(start_bot)
 dp.message.register(get_start, Command(commands="start"))
+
+# Help
+dp.message.register(get_help, Command(commands="help"))
 
 # Register user
 dp.message.register(start_register, F.text == "Зареєструватись")
