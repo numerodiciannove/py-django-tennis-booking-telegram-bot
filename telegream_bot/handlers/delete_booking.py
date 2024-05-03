@@ -26,7 +26,7 @@ async def delete_booking(call: CallbackQuery):
         await delete_booking_from_db(call.from_user.id, day, time_slot)
         await call.message.edit_reply_markup(reply_markup=None)
         await call.message.answer(
-            "Час був видалений.",
+            "✅ Час був видалений.",
             reply_markup=calendar_kb
         )
     else:

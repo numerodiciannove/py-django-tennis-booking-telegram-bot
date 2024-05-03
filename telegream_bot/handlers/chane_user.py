@@ -32,6 +32,7 @@ async def set_new_name(message: Message, bot: Bot, state: FSMContext):
         f"Змінив твоє імя на {reg_name}",
         reply_markup=profile_kb
     )
+    await state.clear()
 
 
 async def start_change_phone(message: Message, bot: Bot, state: FSMContext):
@@ -62,6 +63,7 @@ async def set_new_phone(message: Message, bot: Bot, state: FSMContext):
             reply_markup=profile_kb
         )
 
+        await state.clear()
     else:
         await bot.send_message(
             message.from_user.id,
