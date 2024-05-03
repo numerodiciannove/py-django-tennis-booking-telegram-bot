@@ -34,7 +34,7 @@ class TelegramUser(models.Model):
     phone_number = models.CharField(
         max_length=13,
         unique=True,
-        help_text="For example '+380951911919'. Without quotes",
+        help_text="For example '0951911919'. Without quotes",
         blank=True,
         null=True,
     )
