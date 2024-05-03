@@ -17,3 +17,19 @@ def time_slots_kb(day):
         kb.button(text=f"{time_slot}", callback_data=f"{time_slot}")
         kb.adjust(1)
     return kb.as_markup()
+
+
+@sync_to_async
+def delete_time_slots_kb(day):
+    all_time_slots = [time[0] for time in Booking.TIME_SLOTS]
+    booked_time_slots = Booking.objects.filter(day=day).values_list("time",
+                                                                    flat=True)
+    available_time_slots = [time_slot for time_slot in all_time_slots if
+                            time_slot in booked_time_slots]
+
+    kb = types.InlineKeyboardMarkup(row_width=1)
+    for time_slot in available_time_slots:
+        kb.add(types.InlineKeyboardButton(text=f"{time_slot}",
+                                          callback_data=f"book_{day}_{time_slot}"))
+
+    return kb.as_markup()

@@ -29,6 +29,7 @@ from telegream_bot.handlers.chane_user import (
     set_new_phone, start_change_phone
 )
 from telegream_bot.handlers.menu import go_to_main_menu, show_calendar_days
+from telegream_bot.handlers.my_bookings import get_my_bookings
 from telegream_bot.state.booking import BookingState
 from telegream_bot.state.change_name import ChangeUserName
 from telegream_bot.state.change_phone import ChangeUserPhone
@@ -99,6 +100,10 @@ dp.message.register(set_new_name, ChangeUserName.first_name)
 # Change user phone
 dp.message.register(start_change_phone, F.text == "Змінити номер телефону")
 dp.message.register(set_new_phone, ChangeUserPhone.phone_number)
+
+# Get user bookings
+dp.message.register(get_my_bookings, F.text == "📝 Мої бронювання")
+
 
 
 async def main():
