@@ -19,7 +19,7 @@ async def start_bookings_for_delete(
     )
 
 
-async def delete_booking(call: CallbackQuery, state: FSMContext):
+async def delete_booking(call: CallbackQuery):
     data = call.data.split("_")
     if len(data) == 4:
         day, time_slot, event, is_repetitive = data
