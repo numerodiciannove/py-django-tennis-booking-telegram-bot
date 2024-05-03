@@ -12,7 +12,7 @@ async def get_my_bookings(message: Message, bot: Bot):
         )
     else:
         formatted_bookings = "\n".join(
-            [f"{day}: {time} - {event}" for day, time, event, is_repetitive in
+            [f"{day}: {time} - {'🔁' if is_repetitive else ''}{event}" for day, time, event, is_repetitive in
              bookings])
         await bot.send_message(
             message.from_user.id,

@@ -1,7 +1,7 @@
 from aiogram import Bot
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
-from telegream_bot.keyboards.chane_profile import change_user_data_profile_kb
+from telegream_bot.keyboards.change_profile import change_user_data_profile_kb
 
 
 async def change_profile(message: Message, bot: Bot, state: FSMContext):
