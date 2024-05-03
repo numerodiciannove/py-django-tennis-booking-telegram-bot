@@ -41,7 +41,8 @@ async def register_name(message: Message, state: FSMContext, bot: Bot):
 
 
 async def register_phone(message: Message, state: FSMContext, bot: Bot):
-    if len(message.text) == 10:
+    phone_number = message.text.strip()
+    if len(phone_number) == 10 and phone_number.isdigit():
         await state.update_data(regphone=message.text)
         reg_data = await state.get_data()
         reg_name = reg_data.get("regname")
@@ -61,7 +62,7 @@ async def register_phone(message: Message, state: FSMContext, bot: Bot):
     else:
         await bot.send_message(
             message.from_user.id,
-            "Вказан не вірний номер телефону."
+            "Вказан не вірний номер телефону. Спробуй ще."
         )
 
 
