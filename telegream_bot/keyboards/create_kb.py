@@ -23,11 +23,12 @@ def time_slots_kb(day):
 @sync_to_async
 def usr_time_slots_for_delete_kb(telegram_user_id):
     user = TelegramUser.objects.get(telegram_id=telegram_user_id)
-    user_booked_time_slots = Booking.objects.filter(user=user).values_list('day', 'time')
+    user_booked_time_slots = Booking.objects.filter(user=user).values_list('day', 'time', 'event', 'is_repetitive')
 
     kb = InlineKeyboardBuilder()
 
-    for day, time_slot in user_booked_time_slots:
-        kb.button(text=f"{day}: {time_slot}", callback_data=f"{day}_{time_slot}")
+    for day, time_slot, event, is_repetitive in user_booked_time_slots:
+        repetition_status = "🔁" if is_repetitive else ""
+        kb.button(text=f"{day}: {time_slot} - {repetition_status}{event}", callback_data=f"{day}_{time_slot}_{event}_{is_repetitive}")
         kb.adjust(1)
     return kb.as_markup()
