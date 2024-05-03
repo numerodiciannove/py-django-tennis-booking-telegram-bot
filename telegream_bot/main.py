@@ -4,8 +4,14 @@ import os
 
 from aiogram import Dispatcher, Bot, F
 from dotenv import load_dotenv
-from telegream_bot.handlers.add_booking import start_booking, add_day, \
-    add_time, add_is_repetitive, add_event
+from telegream_bot.handlers.add_booking import (
+    start_booking,
+    add_day,
+    add_time,
+    add_is_repetitive,
+    add_event
+)
+from telegream_bot.handlers.cahnge_profile import change_profile
 from telegream_bot.handlers.calendar import (
     open_calendar,
     show_calendar_all,
@@ -17,15 +23,25 @@ from telegream_bot.handlers.calendar import (
     get_saturday_calendar,
     get_sunday_calendar
 )
+from telegream_bot.handlers.chane_user import (
+    start_change_name,
+    set_new_name,
+    set_new_phone, start_change_phone
+)
 from telegream_bot.handlers.menu import go_to_main_menu, show_calendar_days
 from telegream_bot.state.booking import BookingState
+from telegream_bot.state.change_name import ChangeUserName
+from telegream_bot.state.change_phone import ChangeUserPhone
 from telegream_bot.state.register import RegisterState
 
 from .handlers.start import get_start
 from .utils.commands import set_commands
 from aiogram.filters import Command
-from .handlers.registration import start_register, register_name, \
+from .handlers.registration import (
+    start_register,
+    register_name,
     register_phone
+)
 
 load_dotenv()
 
@@ -44,7 +60,7 @@ async def start_bot(bot: Bot):
 dp.startup.register(start_bot)
 dp.message.register(get_start, Command(commands="start"))
 
-# Register handler registration
+# Register user
 dp.message.register(start_register, F.text == "Зареєструватись")
 dp.message.register(register_name, RegisterState.first_name)
 dp.message.register(register_phone, RegisterState.phone_number)
@@ -72,6 +88,17 @@ dp.message.register(add_day, BookingState.day)
 dp.callback_query.register(add_time, BookingState.time)
 dp.message.register(add_is_repetitive, BookingState.is_repetitive)
 dp.message.register(add_event, BookingState.event)
+
+# Change user -Є profile keyboard
+dp.message.register(change_profile, F.text == "😎Профіль")
+
+# Change user name
+dp.message.register(start_change_name, F.text == "Змінити ім'я")
+dp.message.register(set_new_name, ChangeUserName.first_name)
+
+# Change user phone
+dp.message.register(start_change_phone, F.text == "Змінити номер телефону")
+dp.message.register(set_new_phone, ChangeUserPhone.phone_number)
 
 
 async def main():

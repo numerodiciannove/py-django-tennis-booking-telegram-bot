@@ -143,12 +143,10 @@ async def send_day_info(user_id, day_info, bot):
             if bookings_info:
                 booked_by_str = ', '.join([info[0] for info in bookings_info])
                 event_str = ', '.join([info[1] for info in bookings_info])
-                is_repetitive_str = ', '.join([str(info[2]) for info in bookings_info])
-                if is_repetitive_str:
-                    is_repetitive_str = "🔁"
-                else:
-                    is_repetitive_str = ""
-                booking_message = f"🔴 <b>{time}</b> {is_repetitive_str}{event_str}{booked_by_str}\n"
+                is_repetitive_str = ', '.join(
+                    [str(info[2]) for info in bookings_info])
+                is_repetitive_icon = "🔁" if "True" in is_repetitive_str else ""
+                booking_message = f"🔴 <b>{time}</b> {is_repetitive_icon} {event_str}{booked_by_str}\n"
             else:
                 booking_message = f"🟢 <b>{time}</b>: Вільно\n"
             day_message += booking_message
@@ -158,6 +156,7 @@ async def send_day_info(user_id, day_info, bot):
             user_id,
             f"Виникла помилка: {str(e)}"
         )
+
 
 @sync_to_async
 def get_bookings_for_day_time_event(day, time):
