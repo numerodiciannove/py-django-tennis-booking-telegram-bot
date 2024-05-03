@@ -1,22 +1,15 @@
 from aiogram import Bot
-from aiogram.types import Message
-from telegream_bot.keyboards.сalendar_kb import calendar_kb
+from aiogram.types import Message, CallbackQuery
+from telegream_bot.keyboards.create_kb import usr_time_slots_for_delete_kb
 from telegream_bot.utils.db_utils import get_user_bookings
 
 
-async def start_bookings_for_delete(message: Message, bot: Bot):
-    bookings = await get_user_bookings(message.from_user.id)
-    if isinstance(bookings, str):
-        await bot.send_message(
-            message.from_user.id,
-            bookings,
-        )
-    else:
-        formatted_bookings = "\n".join(
-            [f"{day}: {time} - {event}" for day, time, event, is_repetitive in
-             bookings])
-        await bot.send_message(
-            message.from_user.id,
-            formatted_bookings,
-            reply_markup=calendar_kb
-        )
+async def start_bookings_for_delete(
+        message: Message,
+        bot: Bot,
+):
+    await bot.send_message(
+        message.from_user.id,
+        f"Обери що відминити:",
+        reply_markup=await usr_time_slots_for_delete_kb(message.from_user.id)
+    )
