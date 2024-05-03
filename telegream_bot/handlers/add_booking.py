@@ -3,6 +3,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery
 from asgiref.sync import sync_to_async
 from booking.models import Booking
+from telegream_bot.keyboards.profile_kb import profile_kb
 from telegream_bot.keyboards.сalendar_kb import (
     add_day_calendar_kb,
     is_repetitive_calendar_kb,
@@ -90,6 +91,7 @@ async def add_event(message: Message, state: FSMContext, bot: Bot):
     await bot.send_message(
         message.from_user.id,
         "Все добре! 🤓 Записав тебе ✍️",
+        reply_markup=profile_kb,
     )
 
 
