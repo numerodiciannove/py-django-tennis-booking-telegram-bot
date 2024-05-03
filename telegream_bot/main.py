@@ -28,6 +28,7 @@ from telegream_bot.handlers.chane_user import (
     set_new_name,
     set_new_phone, start_change_phone
 )
+from telegream_bot.handlers.delete_booking import start_bookings_for_delete
 from telegream_bot.handlers.menu import go_to_main_menu, show_calendar_days
 from telegream_bot.handlers.my_bookings import get_my_bookings
 from telegream_bot.state.booking import BookingState
@@ -104,6 +105,8 @@ dp.message.register(set_new_phone, ChangeUserPhone.phone_number)
 # Get user bookings
 dp.message.register(get_my_bookings, F.text == "📝 Мої бронювання")
 
+# Delete my bookings
+dp.message.register(start_bookings_for_delete, F.text == "❌ Відминити бронь")
 
 
 async def main():
