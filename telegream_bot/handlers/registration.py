@@ -53,6 +53,7 @@ async def register_phone(message: Message, state: FSMContext, bot: Bot):
         )
 
         await create_user(
+
             first_name=reg_name,
             phone_number=reg_phone,
             telegram_id=message.from_user.id,

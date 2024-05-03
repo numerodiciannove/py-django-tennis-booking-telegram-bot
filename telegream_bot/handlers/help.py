@@ -17,12 +17,10 @@ async def get_help(message: Message, bot: Bot):
             f"🏐: Волейбол\n"
             f"🏀: Баскетбол\n\n"
             f"Основний чат бота: @Nikitarista\n"
-            f"Monobank: 5375 4115 0688 6717\n\n"
-            f"Якшо є бажання залишити донат розробнику @numerodiciannove для покращеня бота:\n"
+            f"Якшо є бажання залишити донат розробнику @numerodiciannove:\n"
             f"Monobank: 4441 1144 5035 4715\n\n"
-            f"Також всі технічні питання до @numerodiciannove (якщо шахраї i когось треба забанити)."
-
+            f"Також всі технічні питання до @numerodiciannove."
         )
         await bot.send_message(
-            message.from_user.id, help_text, reply_markup=profile_kb
+            message.from_user.id, help_text,
         )

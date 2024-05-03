@@ -15,11 +15,11 @@ from user.models import TelegramUser
 
 
 async def start_booking(message: Message, state: FSMContext, bot: Bot):
-    await bot.send_message(message.from_user.id, "Давай почнемо💫")
+    await bot.send_message(message.from_user.id, "Давай почнемо💫.\n⚠️Вибирай відповідь тільки нажаттям на кнопки!⚠️")
 
     await bot.send_message(
         message.from_user.id,
-        f"Обери день.",
+        f"Обери день, натисни кнопку нижче...",
         reply_markup=add_day_calendar_kb,
     )
 
@@ -29,7 +29,7 @@ async def start_booking(message: Message, state: FSMContext, bot: Bot):
 async def add_day(message: Message, state: FSMContext, bot: Bot):
     await bot.send_message(
         message.from_user.id,
-        f"Обери вільний час:",
+        f"Обери вільний час, натисни кнопку нижче...",
         reply_markup=await time_slots_kb(message.text),
     )
     await state.update_data(regday=message.text)
