@@ -18,8 +18,9 @@ async def get_help(message: Message, bot: Bot):
         f"Основний чат бота:\n"
         f"https://t.me/+PmZ69lpeKZBhZmMy\n"
         f"Адмін:\n"
-        f"@Nikitarista\n\n"
-        f"Якшо є бажання залишити донат розробнику @numerodiciannove:\n"
+        f"@Nikitarista\n"
+        f"Monomank: 5375411506886717\n\n"
+        f"Якшо є бажання залишити донат розробнику бота @numerodiciannove:\n"
         f"Monobank: 4441 1144 5035 4715\n\n"
         f"Також всі технічні питання до @numerodiciannove."
     )
