@@ -99,10 +99,10 @@ events_calendar_kb = ReplyKeyboardMarkup(
         ],
         [
             KeyboardButton(text="🎾💪"),
-            KeyboardButton(text="🎾👶👧🏻🧒🏾"),
+            KeyboardButton(text="🎾👶"),
         ],
         [
-            KeyboardButton(text="🎾🧍‍♂️🧍‍♀️🧍"),
+            KeyboardButton(text="🎾👨‍👦‍👦️"),
             KeyboardButton(text="🎾🏆")
         ],
         [
