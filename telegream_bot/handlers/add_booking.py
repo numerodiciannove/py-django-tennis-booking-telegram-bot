@@ -15,7 +15,8 @@ from user.models import TelegramUser
 
 
 async def start_booking(message: Message, state: FSMContext, bot: Bot):
-    await bot.send_message(message.from_user.id, "Давай почнемо💫.\n⚠️Вибирай відповідь тільки нажаттям на кнопки!⚠️")
+    await bot.send_message(message.from_user.id,
+                           "Давай почнемо💫.\n⚠️Вибирай відповідь тільки нажаттям на кнопки!⚠️")
 
     await bot.send_message(
         message.from_user.id,
@@ -27,6 +28,17 @@ async def start_booking(message: Message, state: FSMContext, bot: Bot):
 
 
 async def add_day(message: Message, state: FSMContext, bot: Bot):
+    day_choices = [day[0] for day in Booking.DAY_OF_WEEK]
+
+    if message.text not in day_choices:
+        await state.clear()
+        await bot.send_message(
+            message.from_user.id,
+            f"Меню....",
+            reply_markup=profile_kb,
+        )
+        return
+
     await bot.send_message(
         message.from_user.id,
         f"Обери вільний час, натисни кнопку нижче...",
