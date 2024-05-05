@@ -63,6 +63,17 @@ async def add_time(
 
 
 async def add_is_repetitive(message: Message, state: FSMContext, bot: Bot):
+    repetitive_choices = ["Одноразова", "Постійна"]
+
+    if message.text not in repetitive_choices:
+        await state.clear()
+        await bot.send_message(
+            message.from_user.id,
+            f"Меню...",
+            reply_markup=profile_kb,
+        )
+        return
+
     await state.update_data(regisrepetetive=message.text)
 
     await bot.send_message(
@@ -83,6 +94,18 @@ async def add_is_repetitive(message: Message, state: FSMContext, bot: Bot):
 
 
 async def add_event(message: Message, state: FSMContext, bot: Bot):
+    event_choices = [event[0] for event in Booking.EVENTS]
+
+    if message.text not in event_choices:
+        await state.clear()
+        await bot.send_message(
+            message.from_user.id,
+            f"Меню....",
+            reply_markup=profile_kb,
+        )
+        return
+
+
     await state.update_data(reg_event=message.text)
 
     reg_data = await state.get_data()
