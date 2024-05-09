@@ -19,7 +19,7 @@ async def start_bookings_for_delete(
     )
 
 
-async def delete_booking(call: CallbackQuery):
+async def delete_booking(call: CallbackQuery, bot: Bot):
     data = call.data.split("_")
     if len(data) == 4:
         day, time_slot, event, is_repetitive = data
@@ -28,6 +28,18 @@ async def delete_booking(call: CallbackQuery):
         await call.message.answer(
             "✅ Час був видалений.",
             reply_markup=calendar_kb
+        )
+        booking_text = (
+            f"🟢 Новий вільний слот!\n\n"
+            f"День: {day}\n"
+            f"Час: {time_slot}\n"
+            f"Постійна: {'Так' if is_repetitive else 'Ні'}\n"
+            f"Івент: {event}"
+        )
+
+        await bot.send_message(
+            chat_id=9,
+            text=booking_text
         )
     else:
         await call.message.edit_reply_markup(reply_markup=None)

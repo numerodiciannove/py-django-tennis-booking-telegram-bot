@@ -104,7 +104,6 @@ async def add_event(message: Message, state: FSMContext, bot: Bot):
         )
         return
 
-
     await state.update_data(reg_event=message.text)
 
     reg_data = await state.get_data()
@@ -119,6 +118,20 @@ async def add_event(message: Message, state: FSMContext, bot: Bot):
         time=reg_time,
         is_repetitive=reg_is_repetitive,
         event=reg_event
+    )
+
+    booking_text = (
+        f"🔴 Нова бронь!\n\n"
+        f"Створив: @{message.from_user.username}\n"
+        f"День: {reg_day}\n"
+        f"Час: {reg_time}\n"
+        f"Постійна: {'Так' if reg_is_repetitive else 'Ні'}\n"
+        f"Івент: {reg_event}"
+    )
+
+    await bot.send_message(
+        chat_id=9,
+        text=booking_text
     )
 
     await state.clear()
