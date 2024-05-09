@@ -28,8 +28,10 @@ from telegream_bot.handlers.chane_user import (
     set_new_name,
     set_new_phone, start_change_phone
 )
-from telegream_bot.handlers.delete_booking import start_bookings_for_delete, \
+from telegream_bot.handlers.delete_booking import (
+    start_bookings_for_delete,
     delete_booking
+)
 from telegream_bot.handlers.help import get_help
 from telegream_bot.handlers.menu import go_to_main_menu, show_calendar_days
 from telegream_bot.handlers.my_bookings import get_my_bookings
