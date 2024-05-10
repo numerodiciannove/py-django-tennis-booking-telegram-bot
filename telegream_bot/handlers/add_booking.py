@@ -125,12 +125,12 @@ async def add_event(message: Message, state: FSMContext, bot: Bot):
         f"Створив: @{message.from_user.username}\n"
         f"День: {reg_day}\n"
         f"Час: {reg_time}\n"
-        f"Постійна: {'Так' if reg_is_repetitive else 'Ні'}\n"
+        f"{reg_is_repetitive}\n"
         f"Івент: {reg_event}"
     )
 
     await bot.send_message(
-        chat_id=9,
+        chat_id=888888,
         text=booking_text
     )
 
