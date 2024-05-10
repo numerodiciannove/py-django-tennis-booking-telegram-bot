@@ -33,12 +33,10 @@ async def delete_booking(call: CallbackQuery, bot: Bot):
             f"🟢 Новий вільний слот!\n\n"
             f"День: {day}\n"
             f"Час: {time_slot}\n"
-            f"Постійна: {'Так' if is_repetitive else 'Ні'}\n"
-            f"Івент: {event}"
         )
 
         await bot.send_message(
-            chat_id=9,
+            chat_id=88888888,
             text=booking_text
         )
     else:
