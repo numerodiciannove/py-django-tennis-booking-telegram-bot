@@ -1,4 +1,4 @@
-# Tennis Booking Bot
+# Tennis Booking Telegram Bot
 
 Tennis Booking Bot is a Telegram bot designed to simplify tennis court reservations and management. The bot is built using the aiogram library and Django framework with an admin panel.
 
